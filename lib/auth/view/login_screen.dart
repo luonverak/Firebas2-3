@@ -20,7 +20,7 @@ class LoginScreen extends StatelessWidget {
             width: double.infinity,
             height: 270,
             decoration: const BoxDecoration(
-              color: Color.fromARGB(255, 66, 68, 70),
+              // color: Color.fromARGB(255, 66, 68, 70),
               borderRadius: BorderRadius.only(
                 bottomLeft: Radius.circular(30),
                 bottomRight: Radius.circular(100),
@@ -28,7 +28,7 @@ class LoginScreen extends StatelessWidget {
             ),
             alignment: Alignment.centerLeft,
             child: const Padding(
-              padding: EdgeInsets.only(left: 10),
+              padding: EdgeInsets.only(left: 18),
               child: Text(
                 'Welcome',
                 style: TextStyle(
