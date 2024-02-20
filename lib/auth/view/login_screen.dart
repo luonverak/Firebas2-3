@@ -1,3 +1,5 @@
+import 'package:demo_firebase2_3/auth/controller/auth_controller.dart';
+import 'package:demo_firebase2_3/auth/model/auth_model.dart';
 import 'package:demo_firebase2_3/auth/view/create_account.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +12,7 @@ class LoginScreen extends StatelessWidget {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   RxBool check = true.obs;
+  final authController = Get.put(AuthController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -68,8 +71,18 @@ class LoginScreen extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 70),
-                const ButtonClick(
-                  text: 'SING IN',
+                GestureDetector(
+                  onTap: () async {
+                    await authController.singInAuth(
+                      AuthModel(
+                        email: emailController.text,
+                        password: passwordController.text.trim(),
+                      ),
+                    );
+                  },
+                  child: const ButtonClick(
+                    text: 'SING IN',
+                  ),
                 ),
                 const SizedBox(height: 20),
                 const Text(

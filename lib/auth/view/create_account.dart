@@ -1,3 +1,5 @@
+import 'package:demo_firebase2_3/auth/controller/auth_controller.dart';
+import 'package:demo_firebase2_3/auth/model/auth_model.dart';
 import 'package:demo_firebase2_3/auth/widget/button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -9,6 +11,7 @@ class CreateAccount extends StatelessWidget {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final cf_passwordController = TextEditingController();
+  final authController = Get.put(AuthController());
   RxBool check = true.obs;
   @override
   Widget build(BuildContext context) {
@@ -104,8 +107,27 @@ class CreateAccount extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 70),
-                  const ButtonClick(
-                    text: 'SING UP',
+                  GestureDetector(
+                    onTap: () async {
+                      if (passwordController.text ==
+                          cf_passwordController.text) {
+                        await authController.signUpAuth(
+                          AuthModel(
+                            email: emailController.text,
+                            password: passwordController.text.trim(),
+                          ),
+                        );
+                      } else {
+                        Get.snackbar(
+                          'Invalid',
+                          'Wrong password.',
+                          colorText: Colors.white,
+                        );
+                      }
+                    },
+                    child: const ButtonClick(
+                      text: 'SING UP',
+                    ),
                   ),
                 ],
               ),
